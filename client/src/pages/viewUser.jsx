@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
+import { apiurl } from '../apiurl';
+
 
 export default function ViewUser() {
     const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Password', 'Update', 'Delete']
     const [users, setUsers] = useState();
-    const ip = '172.20.10.9'
+    const ip = apiurl
 
     async function getData() {
-        await axios.get(`http://${ip}:3001/viewuser`).then((response) => setUsers(response.data))
+        await axios.get(`${ip}/viewuser`).then((response) => setUsers(response.data))
     }
 
     async function handleDeleteUser(id) {
-        await axios.delete(`http://${ip}:3001/delete/${id}`);
+        await axios.delete(`${ip}/delete/${id}`);
         await getData();
     }
 

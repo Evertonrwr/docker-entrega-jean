@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { apiurl } from '../apiurl';
+
 
 export default function UpdateUser() {
     const { id } = useParams();
@@ -10,10 +12,10 @@ export default function UpdateUser() {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
-    const ip = '172.20.10.9'
+    const ip = apiurl
 
     async function getData() {
-        await axios.get(`http://${ip}:3001/user/${id}`).then((response) => {
+        await axios.get(`${ip}/user/${id}`).then((response) => {
             const userData = response.data[0];
             setFirstName(userData.first_name)
             setLastName(userData.last_name)
@@ -30,7 +32,7 @@ export default function UpdateUser() {
     }
 
     function handleUpdateUser() {
-        axios.put(`http://${ip}:3001/update`, {
+        axios.put(`${ip}/update`, {
             id: id,
             first_name: firstname,
             last_name: lastname,

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
+import { apiurl } from '../apiurl';
+
 
 export default function CreateUser() {
     const [values,setValues] = useState();
-    const ip = '172.20.10.9'
+    const ip = apiurl
 
     const handleChangeValues = (value) => {
         setValues((prevValue) => ({
@@ -18,7 +20,7 @@ export default function CreateUser() {
     }
 
     function handleClickButton() {
-        axios.post(`http://${ip}:3001/create`, {
+        axios.post(`${ip}/create`, {
             first_name: values.firstname,
             last_name: values.lastname,
             email: values.email,
